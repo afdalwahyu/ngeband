@@ -21,9 +21,34 @@ Route::group(['prefix' => 'api'], function () {
   //send request with email & password using method POST
   Route::post('authenticate', 'AuthenticateController@authenticate');
 
+  //Register
+  Route::post('register','UserController@store')
+
   //routes for authenticated user only
   Route::group(['middleware' => 'auth'], function () {
+
+    //show user profile
     Route::get('user/profile', 'UserController@showProfile');
+
+    //update user profile
+    Route::post('user/update', 'UserController@updateProfile');
+
+    //-------band------//
+    //create band
+    //show band member list
+    //join band
+    //edit band member (only creator)
+    //accept/decline pending member
+    //-----------------//
+
+    //-------friend------//
+    //show friend
+    //add friend
+    //approve friend
+    //decline friend
+    //unfriend
+    //-------------------//
+
   });
 
 });
