@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','location','instrument','genre',
     ];
 
     /**
@@ -44,5 +44,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Friend');
     }
 
+    public function scopeGetStatusFriendRequest($query,$type)
+    {
+        return $query->friend->where('user_id_response',$type);
+    }
+
+    public function scope GetStatusBandRequest($query)
+    {
+        return $query->reqjoin;
+    }
 
 }
