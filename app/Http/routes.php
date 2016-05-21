@@ -15,3 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//routes API for json data transfer
+Route::group(['prefix' => 'api'], function () {
+
+  //send request with email & password using method POST
+  Route::post('authenticate', 'AuthenticateController@authenticate');
+
+  //routes for authenticated user only
+  Route::group(['middleware' => 'auth'], function () {
+    Route::get('user/profile', 'UserController@showProfile');
+  });
+
+});
