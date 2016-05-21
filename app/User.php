@@ -23,4 +23,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function bandmember()
+    {
+        return $this->hasMany('App\Bandmember');
+    }
+
+    public function Band()
+    {
+        return $this->hasMany('App\Band');
+    }
+
+    public function reqjoin()
+    {
+        return $this->hasMany('App\Reqjoin');
+    }
+
+    public function friend()
+    {
+        return $this->hasMany('App\Friend');
+    }
+
+
 }

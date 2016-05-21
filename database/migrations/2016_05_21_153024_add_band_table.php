@@ -16,10 +16,7 @@ class AddBandTable extends Migration
             $table->increments('id');
             //creator maker
             $table->integer('user_id')->unsigned();
-            //list joined band
-            $table->integer('bandmember_id')->unsigned();
-            //list requested user
-            $table->integer('reqjoin_id')->unsigned();
+
             $table->time('time');
             $table->string('place');
             $table->mediumText('description');
