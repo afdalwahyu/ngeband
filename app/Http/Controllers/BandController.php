@@ -12,17 +12,29 @@ class BandController extends Controller
 {
 
     $required = [
-        'name' => 'required',
-        'email' => 'required|email',
-        'password' => 'required',
-        'location' => 'required',
-        'instrument' => 'required',
-        'genre' => 'required',
+        'time' => 'required',
+        'place' => 'required',
+        'description' => 'required',
     ]
 
     public function store(Requests $request)
     {
+        $user = Auth::user();
 
+        $validator = Validator::make($request->all(), $required);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $band = new App\Band;
+        $band->user_id = $user->id;
+        $band->time = $request->time;
+        $band->place = $request->place;
+        $band->description = $request->description;
+        $band->save();
+
+        return response()->json(['status' => 'success','message' => 'success insert data']);
     }
 
     public function show($id)

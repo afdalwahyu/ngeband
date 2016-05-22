@@ -39,7 +39,7 @@ class UserController extends Controller
         $user->genre = $request->genre;
         $user->save();
 
-        return response()->json(['status' => 'success','message' => 'ok']);
+        return response()->json(['status' => 'success','message' => 'success insert data']);
 
     }
 
@@ -67,7 +67,7 @@ class UserController extends Controller
         $user->genre = $request->genre;
         $user->save();
 
-        return response()->json(['status' => 'success','message' => 'ok']);
+        return response()->json(['status' => 'success','message' => 'success update data']);
     }
 
     public function showBand()
@@ -90,7 +90,7 @@ class UserController extends Controller
         $friendreq = App\Friend::where('user_id_response', $user->id)->where('user_id_action',$id)->firstOrFail();
         $friendreq->status = $code;
         $friendreq->save();
-        return response()->json(['status' => 'success','message' => 'ok']);
+        return response()->json(['status' => 'success','message' => 'success update friend']);
     }
 
     public function updateBand(Requests $request, $id, $friendid, $code)
@@ -114,7 +114,7 @@ class UserController extends Controller
             $reqjoin->status = 2;
             $reqjoin->save();           
         }
-        return response()->json(['status' => 'success','message' => 'ok']);
+        return response()->json(['status' => 'success','message' => 'success modify data band request']);
     }
 
 }
