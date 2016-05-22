@@ -13,25 +13,8 @@
 
 use Illuminate\Http\Request;
 
-Route::post('/', function (Request $request) {
-    // $user = new App\User;
-    // $user->name = "test";
-    // $user->email = "assdafsdfsfsf@dss.ccc";
-    // $user->password = Hash::make("dddd");
-    // $user->location = "dd";
-    // $user->instrument = "dsdsdcccc";
-    // $user->genre = "ddedfefef";
-    // $user->save();
-
-  // $user = App\User::where('id',1)->where('name','berubah!!')->firstOrFail();
-  // $user->name = "dsdsd!!";
-  // $user->save();
-  // return response()->json($user);
-
-  //$test = $request->name;
-
-  return Hash::make("secret");;
-
+Route::get('/', function (Request $request) {
+  return 'please use /api/ uri';
 });
 
 //routes API for json data transfer
