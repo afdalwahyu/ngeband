@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+use Illuminate\Http\Request;
+
+Route::post('/', function (Request $request) {
     // $user = new App\User;
     // $user->name = "test";
     // $user->email = "assdafsdfsfsf@dss.ccc";
@@ -21,10 +23,14 @@ Route::get('/', function () {
     // $user->genre = "ddedfefef";
     // $user->save();
 
-  $user = App\User::where('id',1)->where('name','berubah!!')->firstOrFail();
-  $user->name = "dsdsd!!";
-  $user->save();
-  return response()->json($user);
+  // $user = App\User::where('id',1)->where('name','berubah!!')->firstOrFail();
+  // $user->name = "dsdsd!!";
+  // $user->save();
+  // return response()->json($user);
+
+  $test = $request->name;
+
+  return $test;
 
 });
 

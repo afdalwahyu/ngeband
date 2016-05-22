@@ -22,7 +22,7 @@ class FriendController extends Controller
       return response()->json($list);
     }
 
-    public function addfriend(Requests $request, $id)
+    public function addfriend(Request $request, $id)
     {
       $user = Auth::user();
       $request = new App\Friend;

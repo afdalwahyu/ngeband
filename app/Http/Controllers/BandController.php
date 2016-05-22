@@ -17,7 +17,7 @@ class BandController extends Controller
         'description' => 'required',
     ]
 
-    public function store(Requests $request)
+    public function store(Request $request)
     {
         $user = Auth::user();
 
@@ -43,7 +43,7 @@ class BandController extends Controller
         return response()->json($band);
     }
 
-    public function join(Requests $request, $id)
+    public function join(Request $request, $id)
     {
         $user = Auth::user();
         if(App\Bandmember::where('user_id',$user->id)->where('band_id',$id)->first() === null )

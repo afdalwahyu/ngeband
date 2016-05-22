@@ -22,7 +22,7 @@ class UserController extends Controller
         'genre' => 'required',
     ]
 
-    public function store(Requests $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), $required);
 
@@ -49,7 +49,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function updateProfile(Requests $request)
+    public function updateProfile(Request $request)
     {
         $olduser = Auth::user();
         $validator = Validator::make($request->all(), $required);
@@ -84,7 +84,7 @@ class UserController extends Controller
         return response()->json($friend);
     }
 
-    public function updateFriend(Requests $request, $id, $code)
+    public function updateFriend(Request $request, $id, $code)
     {
         $user = Auth::user();
         $friendreq = App\Friend::where('user_id_response', $user->id)->where('user_id_action',$id)->firstOrFail();
@@ -93,7 +93,7 @@ class UserController extends Controller
         return response()->json(['status' => 'success','message' => 'success update friend']);
     }
 
-    public function updateBand(Requests $request, $id, $friendid, $code)
+    public function updateBand(Request $request, $id, $friendid, $code)
     {
         $user = Auth::user();
         $band = App\Band::where('id',$id)->where('user_id',$user->id)->firstOrFail();
