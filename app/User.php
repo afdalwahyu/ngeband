@@ -29,7 +29,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Bandmember');
     }
 
-    public function Band()
+    public function band()
     {
         return $this->hasMany('App\Band');
     }
