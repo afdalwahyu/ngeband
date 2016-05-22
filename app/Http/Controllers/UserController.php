@@ -97,7 +97,8 @@ class UserController extends Controller
         $user = Auth::user();
         try{            
             $friend = DB::select('
-                select u1.name as name_act, u2.name as name_resp, 
+                select friend.id as id, 
+                u1.name as name_act, u2.name as name_resp, 
                 friend.user_id_action,friend.user_id_response,
                 friend.status,friend.description from friend 
                 inner join users u1 on u1.id = friend.user_id_action 
