@@ -8,7 +8,11 @@ use App\Http\Requests;
 
 use App\User;
 
+use App;
+
 use Auth;
+
+use DB;
 
 use Validator;
 
@@ -82,7 +86,14 @@ class UserController extends Controller
     public function pending()
     {
         $user = Auth::user();
-        $friend = App\Friend::where('user_id_response',$user->id)->where('status',0)->firstOrFail();
+        $friend = DB::select('
+            select u1.name as name_act, u2.name as name_resp, 
+            friend.user_id_action,friend.user_id_response,
+            friend.status,friend.description from friend 
+            inner join users u1 on u1.id = friend.user_id_action 
+            inner join users u2 on u2.id = friend.user_id_response
+            where (user_id_response = '.$user->id.' and status = "0")
+        ');
         return response()->json($friend);
     }
 

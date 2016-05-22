@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\User
+use App\User;
+
+use App;
 
 use Auth;
 
