@@ -39,16 +39,35 @@ class BandController extends Controller
 
     public function show($id)
     {
-
+        $band = App\Band::where('id',$id)->firstOrFail();
+        return response()->json($band);
     }
 
     public function join(Requests $request, $id)
     {
+        $user = Auth::user();
+        if(App\Bandmember::where('user_id',$user->id)->where('band_id',$id)->first() === null )
+        {
+            return response()->json(['status' => 'error','message' => 'user already join']);
+        }
+        else if(App\Reqjoin::where('user_id',$user->id)->where('band_id',$id)->first() === null)
+        {
+            return response()->json(['status' => 'error','message' => 'user in waiting list']);
+        }
 
+        $reqjoin = new App\Reqjoin;
+        $reqjoin->user_id = $user->id;
+        $reqjoin->band_id = $id;
+        $reqjoin->status = 0;
+        $reqjoin->description = $request->description;
+        $reqjoin->save();
+
+        return response()->json(['status' => 'success','message' => 'success insert in data request join']);
     }
 
     public function list($id)
     {
-
+        $list = App\Bandmember::where('band_id',$id)->firstOrFail();
+        return response()->json($list);
     }
 }

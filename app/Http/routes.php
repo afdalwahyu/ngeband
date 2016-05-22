@@ -60,7 +60,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::group(['prefix' => 'band'], function () {
       //create
       Route::post('store','BandController@store');
-      //show band member list
+      //show band info
       Route::get('{id}','BandController@show');
       //join list
       Route::post('join/{id}','BandController@join')->where(['id' => '[0-9]+']);
