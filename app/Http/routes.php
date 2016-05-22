@@ -38,7 +38,7 @@ Route::group(['prefix' => 'api'], function () {
       //show user profile
       Route::get('profile', 'UserController@showProfile');
       //update user profile
-      Route::put('update', 'UserController@updateProfile');
+      Route::put('profile', 'UserController@updateProfile');
       //get list band created by user
       Route::get('band','UserController@showBand');
       //show friend pending list

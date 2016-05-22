@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,10 +21,18 @@ use Validator;
 class UserController extends Controller
 {
 
-    public $required = [
+    private $required = [
         'name' => 'required',
         'email' => 'required|email',
         'password' => 'required',
+        'location' => 'required',
+        'instrument' => 'required',
+        'genre' => 'required',
+    ];
+
+    private $reqedit = [
+        'name' => 'required',
+        'email' => 'required|email',
         'location' => 'required',
         'instrument' => 'required',
         'genre' => 'required',
@@ -39,13 +49,13 @@ class UserController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = \Hash::make($request->password);
         $user->location = $request->location;
         $user->instrument = $request->instrument;
         $user->genre = $request->genre;
         $user->save();
 
-        return response()->json(['status' => 'success','message' => 'success insert data']);
+        return response()->json(['status' => 'success','message' => 'success insert data user']);
 
     }
 
@@ -58,7 +68,7 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $olduser = Auth::user();
-        $validator = Validator::make($request->all(), $required);
+        $validator = Validator::make($request->all(), $this->reqedit);
 
         if ($validator->fails()) {
             return response()->json($validator->messages());
@@ -67,7 +77,6 @@ class UserController extends Controller
         $user = User::find($olduser->id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
         $user->location = $request->location;
         $user->instrument = $request->instrument;
         $user->genre = $request->genre;
@@ -86,14 +95,19 @@ class UserController extends Controller
     public function pending()
     {
         $user = Auth::user();
-        $friend = DB::select('
-            select u1.name as name_act, u2.name as name_resp, 
-            friend.user_id_action,friend.user_id_response,
-            friend.status,friend.description from friend 
-            inner join users u1 on u1.id = friend.user_id_action 
-            inner join users u2 on u2.id = friend.user_id_response
-            where (user_id_response = '.$user->id.' and status = "0")
-        ');
+        try{            
+            $friend = DB::select('
+                select u1.name as name_act, u2.name as name_resp, 
+                friend.user_id_action,friend.user_id_response,
+                friend.status,friend.description from friend 
+                inner join users u1 on u1.id = friend.user_id_action 
+                inner join users u2 on u2.id = friend.user_id_response
+                where (user_id_response = '.$user->id.' and status = "0")
+            ');
+        }
+        catch (NotFoundHttpException $e){
+            return response()->json(["status" => "error","message" => "no friend found"],404);
+        }
         return response()->json($friend);
     }
 
