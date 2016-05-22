@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), $required);
+        $validator = Validator::make($request->all(), $this->required);
 
         if ($validator->fails()) {
             return response()->json($validator->messages());

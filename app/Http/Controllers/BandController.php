@@ -25,7 +25,7 @@ class BandController extends Controller
     {
         $user = Auth::user();
 
-        $validator = Validator::make($request->all(), $required);
+        $validator = Validator::make($request->all(), $this->required);
 
         if ($validator->fails()) {
             return response()->json($validator->messages());
