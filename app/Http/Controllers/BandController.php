@@ -15,11 +15,11 @@ use Auth;
 class BandController extends Controller
 {
 
-    $required = [
+    public $required = [
         'time' => 'required',
         'place' => 'required',
         'description' => 'required',
-    ]
+    ];
 
     public function store(Request $request)
     {
@@ -69,9 +69,9 @@ class BandController extends Controller
         return response()->json(['status' => 'success','message' => 'success insert in data request join']);
     }
 
-    public function list($id)
+    public function lists($id)
     {
-        $list = App\Bandmember::where('band_id',$id)->firstOrFail();
+        $list = App\Bandmember::where('band_id',$id)->get();
         return response()->json($list);
     }
 }

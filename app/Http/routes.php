@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function () {
       //join list
       Route::post('join/{id}','BandController@join')->where(['id' => '[0-9]+']);
       //show member band list
-      Route::get('list/{id}','BandController@list')->where(['id' => '[0-9]+']);
+      Route::get('list/{id}','BandController@lists')->where(['id' => '[0-9]+']);
     });
 
 
