@@ -12,7 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // $user = new App\User;
+    // $user->name = "test";
+    // $user->email = "assdafsdfsfsf@dss.ccc";
+    // $user->password = Hash::make("dddd");
+    // $user->location = "dd";
+    // $user->instrument = "dsdsdcccc";
+    // $user->genre = "ddedfefef";
+    // $user->save();
+
+  $user = App\User::where('id',1)->where('name','berubah!!')->firstOrFail();
+  $user->name = "dsdsd!!";
+  $user->save();
+  return response()->json($user);
+
 });
 
 //routes API for json data transfer
@@ -22,7 +35,7 @@ Route::group(['prefix' => 'api'], function () {
   Route::post('authenticate', 'AuthenticateController@authenticate');
 
   //Register
-  Route::post('register','UserController@store')
+  Route::post('register','UserController@store');
 
   //routes for authenticated user only
   Route::group(['middleware' => 'auth'], function () {
@@ -35,11 +48,13 @@ Route::group(['prefix' => 'api'], function () {
       Route::put('update', 'UserController@updateProfile');
       //get list band created by user
       Route::get('band','UserController@showBand');
+      //show friend pending list
+
       //accept or decline pending friend request
-      Route::put('friend/{id}','UserController@updateFriend')->where(['id' => '[0-9]+']);
+      Route::put('friend/{id}/{code}','UserController@updateFriend')->where(['id' => '[0-9]+','code' => '[0-2]+']);
       //accept or decline pending band request
-      Route::put('band/{id}','UserController@updateBand')->where(['id' => '[0-9]+']);;
-    }
+      Route::put('band/{id}/{friendid}/{code}','UserController@updateBand')->where(['id' => '[0-9]+','code' => '[0-2]+','friendid' => '[0-9]+']);
+    });
 
     //group for band
     Route::group(['prefix' => 'band'], function () {
@@ -51,7 +66,7 @@ Route::group(['prefix' => 'api'], function () {
       Route::post('join/{id}','BandController@join')->where(['id' => '[0-9]+']);
       //show member band list
       Route::get('list/{id}','BandController@list')->where(['id' => '[0-9]+']);
-    }
+    });
 
 
     //group for friend
@@ -62,7 +77,7 @@ Route::group(['prefix' => 'api'], function () {
       Route::get('list/{id}','FriendController@showlist')->where(['id' => '[0-9]+']);
       //add as friend
       Route::post('add/{id}','FriendController@addfriend')->where(['id' => '[0-9]+']);
-    }
+    });
   });
 
 });
