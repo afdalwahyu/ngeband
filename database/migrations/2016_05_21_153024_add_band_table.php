@@ -17,7 +17,7 @@ class AddBandTable extends Migration
             //creator maker
             $table->integer('user_id')->unsigned();
 
-            $table->time('time');
+            $table->date('time');
             $table->string('place');
             $table->mediumText('description');
             $table->timestamps();
