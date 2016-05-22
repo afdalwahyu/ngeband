@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\User
 
+use Auth;
+
 class BandController extends Controller
 {
 

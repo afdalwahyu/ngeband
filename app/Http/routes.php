@@ -28,9 +28,9 @@ Route::post('/', function (Request $request) {
   // $user->save();
   // return response()->json($user);
 
-  $test = $request->name;
+  //$test = $request->name;
 
-  return $test;
+  return Hash::make("secret");;
 
 });
 
@@ -44,7 +44,11 @@ Route::group(['prefix' => 'api'], function () {
   Route::post('register','UserController@store');
 
   //routes for authenticated user only
-  Route::group(['middleware' => 'auth'], function () {
+  Route::group(['middleware' => 'jwt.auth'], function () {
+
+    Route::get('tes',function(){
+      return 'tes';
+    });
 
     //group for user
     Route::group(['prefix' => 'user'], function () {

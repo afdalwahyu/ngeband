@@ -6,21 +6,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\User
+use App\User;
+
+use Auth;
 
 use Validator;
 
 class UserController extends Controller
 {
 
-    $required = [
+    public $required = [
         'name' => 'required',
         'email' => 'required|email',
         'password' => 'required',
         'location' => 'required',
         'instrument' => 'required',
         'genre' => 'required',
-    ]
+    ];
 
     public function store(Request $request)
     {

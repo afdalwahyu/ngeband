@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
       // $this->call(UsersTableSeeder::class);
-      factory(App\User::class,10)->create()->each(function($u) {
+      factory(App\User::class,5)->create()
+      ->each(function($u) {
         $u->band()->save(factory(App\Band::class)->make());
-        $u->friend()->save(factory(App\Friend::class)->make());
-        $u->reqjoin()->save(factory(App\Reqjoin::class)->make());
-        $u->bandmember()->saveMany(factory(App\bandmember::class)->make());
+        //$u->reqjoin()->save(factory(App\Reqjoin::class)->make());
+        //$u->bandmember()->save(factory(App\Bandmember::class)->make());
       });
     }
 }
