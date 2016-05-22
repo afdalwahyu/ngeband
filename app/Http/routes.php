@@ -49,7 +49,7 @@ Route::group(['prefix' => 'api'], function () {
       //get list band created by user
       Route::get('band','UserController@showBand');
       //show friend pending list
-
+      Route::get('friend/pending','UserController@pending');
       //accept or decline pending friend request
       Route::put('friend/{id}/{code}','UserController@updateFriend')->where(['id' => '[0-9]+','code' => '[0-2]+']);
       //accept or decline pending band request

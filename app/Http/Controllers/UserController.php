@@ -77,6 +77,13 @@ class UserController extends Controller
         return response()->json($band);
     }
 
+    public function pending()
+    {
+        $user = Auth::user();
+        $friend = App\Friend::where('user_id_response',$user->id)->where('status',0)->firstOrFail();
+        return response()->json($friend);
+    }
+
     public function updateFriend(Requests $request, $id, $code)
     {
         $user = Auth::user();
