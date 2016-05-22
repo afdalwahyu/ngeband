@@ -8,12 +8,17 @@ use App\Http\Requests;
 
 class UserController extends Controller
 {
+    public function store(Requests $request)
+    {
+
+    }
+
     public function showProfile()
     {
 
     }
 
-    public function updateProfile()
+    public function updateProfile(Requests $request)
     {
 
     }
@@ -23,12 +28,12 @@ class UserController extends Controller
 
     }
 
-    public function updateFriend($id)
+    public function updateFriend(Requests $request, $id)
     {
 
     }
 
-    public function updateBand($id)
+    public function updateBand(Requests $request, $id)
     {
 
     }

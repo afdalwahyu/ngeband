@@ -49,9 +49,8 @@ class User extends Authenticatable
         return $query->friend->where('user_id_response',$type);
     }
 
-    public function scope GetStatusBandRequest($query)
+    public function scopeGetStatusBandRequest($query)
     {
         return $query->reqjoin;
     }
-
 }
