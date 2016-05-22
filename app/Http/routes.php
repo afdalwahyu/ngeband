@@ -34,11 +34,11 @@ Route::group(['prefix' => 'api'], function () {
       //update user profile
       Route::put('update', 'UserController@updateProfile');
       //get list band created by user
-      Route::get('band','UserController@showband');
+      Route::get('band','UserController@showBand');
       //accept or decline pending friend request
-      Route::put('friend/{id}','UserController@updatefriend');
+      Route::put('friend/{id}','UserController@updateFriend')->where(['id' => '[0-9]+']);
       //accept or decline pending band request
-      Route::put('band/{id}','UserController@updateband');
+      Route::put('band/{id}','UserController@updateBand')->where(['id' => '[0-9]+']);;
     }
 
     //group for band
@@ -48,20 +48,20 @@ Route::group(['prefix' => 'api'], function () {
       //show band member list
       Route::get('{id}','BandController@show');
       //join list
-      Route::post('join/{id}','BandController@join');
+      Route::post('join/{id}','BandController@join')->where(['id' => '[0-9]+']);
       //show member band list
-      Route::get('list/{id}','BandController@list')
+      Route::get('list/{id}','BandController@list')->where(['id' => '[0-9]+']);
     }
 
 
     //group for friend
     Route::group(['prefix' => 'friend'], function () {
       //show profile based on id
-      Route::get('{id}','FriendController@show')
+      Route::get('{id}','FriendController@show');
       //show list friend based on id
-      Route::get('list/{id}','FriendController@showlist')
+      Route::get('list/{id}','FriendController@showlist')->where(['id' => '[0-9]+']);
       //add as friend
-      Route::post('add/{id}','FriendController@addfriend')
+      Route::post('add/{id}','FriendController@addfriend')->where(['id' => '[0-9]+']);
     }
   });
 
