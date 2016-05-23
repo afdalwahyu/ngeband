@@ -57,6 +57,10 @@ class Handler extends ExceptionHandler
             ],
         ];
 
+        if ($error->getStatusCode() == 404) {
+            $json['error']['message'] = "Not Found";
+        }
+
         return response()->json($json, $error->getStatusCode());
     }
 }
